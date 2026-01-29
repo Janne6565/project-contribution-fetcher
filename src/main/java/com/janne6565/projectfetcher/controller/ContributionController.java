@@ -21,10 +21,9 @@ public class ContributionController {
         this.service = service;
     }
 
-    @GetMapping("/{year}")
+    @GetMapping
     public Map<LocalDate, List<ContributionEvent>> get(
-            @PathVariable int year
     ) {
-        return service.fetchYear(year);
+        return service.getCachedContributions();
     }
 }
