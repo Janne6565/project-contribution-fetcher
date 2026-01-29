@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public record ContributionEvent(
         LocalDate day,
         ContributionType type,
-        URI repositoryUrl
+        URI repositoryUrl,
+        URI reference
 ) {
 }

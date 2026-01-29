@@ -2,6 +2,7 @@ package com.janne6565.projectfetcher.controller;
 
 import com.janne6565.projectfetcher.dtos.ContributionEvent;
 import com.janne6565.projectfetcher.services.GitHubContributionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/contributions")
 public class ContributionController {
 
     private final GitHubContributionService service;
-
-    public ContributionController(GitHubContributionService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public Map<LocalDate, List<ContributionEvent>> get(

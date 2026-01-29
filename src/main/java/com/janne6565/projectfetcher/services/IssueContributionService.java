@@ -59,7 +59,8 @@ public class IssueContributionService {
                 result.add(new ContributionEvent(
                         issue.occurredAt().atZone(ZoneOffset.UTC).toLocalDate(),
                         ContributionType.ISSUE,
-                        issue.issue().repository().url()
+                        issue.issue().repository().url(),
+                        issue.issue().url()
                 ));
             }
 

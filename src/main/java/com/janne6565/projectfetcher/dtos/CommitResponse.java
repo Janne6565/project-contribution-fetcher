@@ -35,12 +35,20 @@ public record CommitResponse(
     }
 
     public record Node(
-            Instant occurredAt
+            Instant occurredAt,
+            int commitCount,
+            URI url
     ) {
     }
 
     public record Repository(
             URI url
+    ) {
+    }
+
+    public record PageInfo(
+            boolean hasNextPage,
+            String endCursor
     ) {
     }
 }

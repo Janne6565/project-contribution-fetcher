@@ -9,29 +9,36 @@ public record IssueResponse(
 ) {
     public record Data(
             User user
-    ) {}
+    ) {
+    }
 
     public record User(
             ContributionsCollection contributionsCollection
-    ) {}
+    ) {
+    }
 
     public record ContributionsCollection(
             IssueContributions issueContributions
-    ) {}
+    ) {
+    }
 
     public record IssueContributions(
             List<Node> nodes,
             PageInfo pageInfo
-    ) {}
+    ) {
+    }
 
     public record Node(
             Instant occurredAt,
             Issue issue
-    ) {}
+    ) {
+    }
 
     public record Issue(
-            Repository repository
-    ) {}
+            Repository repository,
+            URI url
+    ) {
+    }
 
     public record Repository(
             URI url

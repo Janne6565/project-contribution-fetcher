@@ -96,7 +96,8 @@ public class CommitContributionService {
             target.add(new ContributionEvent(
                     c.occurredAt().atZone(ZoneOffset.UTC).toLocalDate(),
                     ContributionType.COMMIT,
-                    repoUrl
+                    repoUrl,
+                    c.url()
             ));
         }
     }

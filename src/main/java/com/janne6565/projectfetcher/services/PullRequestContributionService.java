@@ -50,7 +50,8 @@ public class PullRequestContributionService {
                 result.add(new ContributionEvent(
                         pr.occurredAt().atZone(ZoneOffset.UTC).toLocalDate(),
                         ContributionType.PULL_REQUEST,
-                        pr.pullRequest().repository().url()
+                        pr.pullRequest().repository().url(),
+                        pr.pullRequest().url()
                 ));
             }
 

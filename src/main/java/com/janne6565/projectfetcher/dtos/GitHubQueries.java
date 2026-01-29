@@ -16,6 +16,7 @@ public final class GitHubQueries {
                         repository {
                           url
                         }
+                        url
                       }
                     }
                     pageInfo {
@@ -39,6 +40,7 @@ public final class GitHubQueries {
                     repository {
                       url
                     }
+                    url
                   }
                 }
                 pageInfo {
@@ -62,6 +64,8 @@ public final class GitHubQueries {
                 contributions(first: 100) {
                   nodes {
                     occurredAt
+                    commitCount
+                    url
                   }
                   pageInfo {
                     hasNextPage
@@ -85,6 +89,8 @@ public final class GitHubQueries {
                 contributions(first: 100, after: $after) {
                   nodes {
                     occurredAt
+                    commitCount
+                    url
                   }
                   pageInfo {
                     hasNextPage

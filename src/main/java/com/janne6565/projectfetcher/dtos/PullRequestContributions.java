@@ -15,7 +15,8 @@ public record PullRequestContributions(
     }
 
     public record PullRequest(
-            Repository repository
+            Repository repository,
+            URI url
     ) {
     }
 
