@@ -46,11 +46,11 @@ public class CommitContributionService {
                 .commitContributionsByRepository();
 
         for (var repo : repos) {
-            URI repoUrl = repo.repository().url();
+            var repository = repo.repository();
             var contributions = repo.contributions();
 
             // First page
-            addAll(result, contributions.nodes(), repoUrl);
+            addAll(result, contributions.nodes(), repository, username);
 
             String after = contributions.pageInfo().endCursor();
 
@@ -73,13 +73,13 @@ public class CommitContributionService {
                         .contributionsCollection()
                         .commitContributionsByRepository()
                         .stream()
-                        .filter(r -> r.repository().url().equals(repoUrl))
+                        .filter(r -> r.repository().url().equals(repository.url()))
                         .findFirst()
                         .orElseThrow();
 
                 contributions = currentRepo.contributions();
 
-                addAll(result, contributions.nodes(), repoUrl);
+                addAll(result, contributions.nodes(), repository, username);
                 after = contributions.pageInfo().endCursor();
             }
         }
@@ -90,14 +90,25 @@ public class CommitContributionService {
     private void addAll(
             List<ContributionEvent> target,
             List<CommitResponse.Node> nodes,
-            URI repoUrl
+            CommitResponse.Repository repository,
+            String username
     ) {
         for (var c : nodes) {
+            // Construct a GitHub search URL for commits by this user on this date
+            var date = c.occurredAt().atZone(ZoneOffset.UTC).toLocalDate();
+            String searchUrl = String.format(
+                    "https://github.com/%s/%s/commits?author=%s&since=%s&until=%s",
+                    repository.owner().login(),
+                    repository.name(),
+                    username,
+                    date,
+                    date.plusDays(1)
+            );
             target.add(new ContributionEvent(
-                    c.occurredAt().atZone(ZoneOffset.UTC).toLocalDate(),
+                    date,
                     ContributionType.COMMIT,
-                    repoUrl,
-                    c.url()
+                    repository.url(),
+                    URI.create(searchUrl)
             ));
         }
     }

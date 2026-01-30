@@ -60,12 +60,15 @@ public final class GitHubQueries {
               commitContributionsByRepository {
                 repository {
                   url
+                  name
+                  owner {
+                    login
+                  }
                 }
                 contributions(first: 100) {
                   nodes {
                     occurredAt
                     commitCount
-                    url
                   }
                   pageInfo {
                     hasNextPage
@@ -85,12 +88,15 @@ public final class GitHubQueries {
               commitContributionsByRepository {
                 repository {
                   url
+                  name
+                  owner {
+                    login
+                  }
                 }
                 contributions(first: 100, after: $after) {
                   nodes {
                     occurredAt
                     commitCount
-                    url
                   }
                   pageInfo {
                     hasNextPage

@@ -36,13 +36,19 @@ public record CommitResponse(
 
     public record Node(
             Instant occurredAt,
-            int commitCount,
-            URI url
+            int commitCount
     ) {
     }
 
     public record Repository(
-            URI url
+            URI url,
+            String name,
+            Owner owner
+    ) {
+    }
+
+    public record Owner(
+            String login
     ) {
     }
 
