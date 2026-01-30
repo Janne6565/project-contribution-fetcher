@@ -25,7 +25,6 @@ public class ContributionAggregationService {
 
         LocalDate d = start;
         while (!d.isAfter(end)) {
-            result.putIfAbsent(d, List.of());
             d = d.plusDays(1);
         }
 
