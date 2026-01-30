@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: projectFetcher
+github:
+  token: ${GITHUB_TOKEN:}
+  username: ${GITHUB_USERNAME:}
