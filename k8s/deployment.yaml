@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: project-fetcher
-          image: ghcr.io/janne6565/project-contribution-fetcher:0.0.3
+          image: ghcr.io/janne6565/project-contribution-fetcher:0.0.4
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
