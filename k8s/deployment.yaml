@@ -29,5 +29,13 @@ spec:
             readOnlyRootFilesystem: false
             runAsNonRoot: false
           resources: {}
+          env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: github-token
+                  key: token
+            - name: GITHUB_USERNAME
+              value: janne6565
           ports:
             - containerPort: 8080
