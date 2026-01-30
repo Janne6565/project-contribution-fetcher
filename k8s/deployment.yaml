@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-fetcher
+  labels:
+    app: project-fetcher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project-fetcher
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: project-fetcher
+    spec:
+      containers:
+        - name: project-fetcher
+          image: ghcr.io/janne6565/project-contribution-fetcher:0.0.2
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          resources: {}
+          ports:
+            - containerPort: 8080

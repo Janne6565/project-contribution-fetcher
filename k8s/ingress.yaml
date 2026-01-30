@@ -1,0 +1,17 @@
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - project-fetcher.jannekeipert.de
+      secretName: multi-domain-cert
+  rules:
+    - host: project-fetcher.jannekeipert.de
+      http:
+        paths:
+          - backend:
+              service:
+                name: project-fetcher
+                port:
+                  number: 80
+            path: /api
+            pathType: Prefix
