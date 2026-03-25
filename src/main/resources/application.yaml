@@ -4,3 +4,4 @@ spring:
 github:
   token: ${GITHUB_TOKEN:}
   username: ${GITHUB_USERNAME:}
+  years-into-past: 7

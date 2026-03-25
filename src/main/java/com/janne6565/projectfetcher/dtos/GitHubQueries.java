@@ -5,109 +5,41 @@ public final class GitHubQueries {
     private GitHubQueries() {
     }
 
-    public static final String PULL_REQUEST_CONTRIBUTIONS = """
-            query ($username: String!, $from: DateTime!, $to: DateTime!, $after: String) {
+    public static final String CONTRIBUTIONS = """
+            query ($username: String!, $from: DateTime!, $to: DateTime!) {
               user(login: $username) {
                 contributionsCollection(from: $from, to: $to) {
-                  pullRequestContributions(first: 100, after: $after) {
-                    nodes {
-                      occurredAt
-                      pullRequest {
-                        repository {
-                          url
-                        }
-                        url
+                  contributionCalendar {
+                    totalContributions
+                    weeks {
+                      contributionDays {
+                        date
+                        contributionCount
                       }
                     }
-                    pageInfo {
-                      hasNextPage
-                      endCursor
-                    }
                   }
+                  commitContributionsByRepository {
+                    repository { url, name }
+                    contributions { totalCount }
+                  }
+                  issueContributionsByRepository {
+                    repository { url, name }
+                    contributions { totalCount }
+                  }
+                  pullRequestContributionsByRepository {
+                    repository { url, name }
+                    contributions { totalCount }
+                  }
+                  pullRequestReviewContributionsByRepository {
+                    repository { url, name }
+                    contributions { totalCount }
+                  }
+                  totalCommitContributions
+                  totalIssueContributions
+                  totalPullRequestContributions
+                  totalPullRequestReviewContributions
                 }
               }
             }
             """;
-
-    public static final String ISSUE_CONTRIBUTIONS = """
-        query ($username: String!, $from: DateTime!, $to: DateTime!, $after: String) {
-          user(login: $username) {
-            contributionsCollection(from: $from, to: $to) {
-              issueContributions(first: 100, after: $after) {
-                nodes {
-                  occurredAt
-                  issue {
-                    repository {
-                      url
-                    }
-                    url
-                  }
-                }
-                pageInfo {
-                  hasNextPage
-                  endCursor
-                }
-              }
-            }
-          }
-        }
-        """;
-
-    public static final String COMMIT_INITIAL = """
-        query ($username: String!, $from: DateTime!, $to: DateTime!) {
-          user(login: $username) {
-            contributionsCollection(from: $from, to: $to) {
-              commitContributionsByRepository {
-                repository {
-                  url
-                  name
-                  owner {
-                    login
-                  }
-                }
-                contributions(first: 100) {
-                  nodes {
-                    occurredAt
-                    commitCount
-                  }
-                  pageInfo {
-                    hasNextPage
-                    endCursor
-                  }
-                }
-              }
-            }
-          }
-        }
-        """;
-
-    public static final String COMMIT_PAGE = """
-        query ($username: String!, $from: DateTime!, $to: DateTime!, $after: String) {
-          user(login: $username) {
-            contributionsCollection(from: $from, to: $to) {
-              commitContributionsByRepository {
-                repository {
-                  url
-                  name
-                  owner {
-                    login
-                  }
-                }
-                contributions(first: 100, after: $after) {
-                  nodes {
-                    occurredAt
-                    commitCount
-                  }
-                  pageInfo {
-                    hasNextPage
-                    endCursor
-                  }
-                }
-              }
-            }
-          }
-        }
-        """;
-
 }
-
